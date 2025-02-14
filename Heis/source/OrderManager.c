@@ -53,12 +53,7 @@ void clearOrders() {
     OrderManager.numOrders = 0;
 }
 
-bool hasPendingOrders(struct OrderManager* om) {
-    if(OrderManager.orderQueue ==0) {
-        return false:
-    }
-    else {
-        return true;
-    }
+bool hasPendingOrders() {
+    return orderManager.numOrders > 0;
 }
 
