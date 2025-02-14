@@ -1,3 +1,17 @@
-//Test
+#include "Elevator.h"
 
-//Slem andreas
+void initialize() { //For å initialisere heisen
+
+}
+
+void moveToFloor(int targetFloor) { //Flytter heisen til ønsket etasje
+
+}
+
+void updateStatus() {   //oppdaterer statusent til heisen kontinuerlig
+
+}
+
+void stop() {       //Stanser heisen øyeblikkelig
+    
+}
