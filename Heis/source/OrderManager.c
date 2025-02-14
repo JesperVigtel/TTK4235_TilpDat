@@ -14,4 +14,3 @@ void freeOrderManager(struct OrderManager* om) {
     om->numOrders = 0;
 }
 */
->>>>>>> b49d721f552c86e673d4ee2ab10958910c29bc06
