@@ -2,21 +2,23 @@
 #ifndef ORDERMANAGER_H
 #define ORDERMANAGER_H
 
-#include <stdio.h> //Input/output funcitons
-#include <stdlib.h>
-#include "driver/elevio.h"
+#include <stdbool.h> // Trengs for bool
+#include <stdlib.h>  // Trengs for malloc/realloc/free
 
-struct OrderManager = {
-//Medlemsvariabler
-    int* orderQueue;    //Pointer to a dynamic array, husk å dealloker
+// Definerer OrderManager-strukturen
+typedef struct {
+    int* orderQueue;
     int numOrders;
+} OrderManager;
 
-//Medlemsfunksjoner
-    void addOrder(int floor);
-    int getNextOrder();
-    void clearOrders();
-    bool hasPendingOrders();
-}
+// Deklarerer en global OrderManager (defineres i OrderManager.c)
+extern OrderManager orderManager;
 
+// Funksjonsprototyper
+void initOrderManager();
+void addOrder(int order);
+int getNextOrder();
+void clearOrders();
+bool hasPendingOrders();
 
-#endif //ORDERMANAGER
+#endif // ORDERMANAGER_H
