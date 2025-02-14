@@ -1,3 +1,4 @@
+#pragma once
 #ifndef ELEVATOR_H
 #define ELEVATOR_H
 
@@ -8,6 +9,8 @@
 //Egne kilder
 #include "MotorController.h"
 #include "SensorSystem.h"
+#include "OrderManager.h"
+
 
 
 
