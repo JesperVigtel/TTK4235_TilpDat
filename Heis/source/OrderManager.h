@@ -11,7 +11,10 @@ struct OrderManager = {
     int numOrders;
 
     //Medlemsfunksjoner
-
+    void addOrder(int floor);
+    int getNextOrder();
+    void clearOrders();
+    bool hasPendingOrders();
 }
 
 
