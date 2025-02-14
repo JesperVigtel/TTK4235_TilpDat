@@ -1,7 +1,7 @@
 #include "MotorController.h"
 
 //Global variabel
-struct MotorController motorController;
+struct MotorController mc;
 
 
 void motorController_init(){

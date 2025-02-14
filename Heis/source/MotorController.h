@@ -21,6 +21,6 @@ struct MotorController = {
     void motorController_init()
 } MotorController;
 
-extern MotorController motorController;
+extern MotorController mc;
 
 #endif

@@ -7,9 +7,6 @@
 #include "driver/elevio.h"
 
 //Egne kilder
-#include "MotorController.h"
-#include "SensorSystem.h"
-#include "OrderManager.h"
 
 
 
@@ -35,7 +32,9 @@ struct Elevator = {
     void moveToFloor(int targetFloor);
     void updateStatus();
     void stop();
-}
+} 
+
+extern MotorController mc;
 
 
 #endif
