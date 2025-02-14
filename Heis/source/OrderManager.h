@@ -6,11 +6,11 @@
 #include "driver/elevio.h"
 
 struct OrderManager = {
-    //Medlemsvariabler
+//Medlemsvariabler
     int* orderQueue;    //Pointer to a dynamic array, husk å dealloker
     int numOrders;
 
-    //Medlemsfunksjoner
+//Medlemsfunksjoner
     void addOrder(int floor);
     int getNextOrder();
     void clearOrders();

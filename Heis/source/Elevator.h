@@ -4,28 +4,26 @@
 #include <stdio.h> //Input/output funcitons
 #include <stdlib.h>
 #include "driver/elevio.h"
+#include "MotorController.h"
 
 
 typedef enum {
-    DIRN_DOWN, DIRN_UP, DIRN_STOP
-} MotorDirection;
-
-typedef enum {
-    IDLE,   //Standig still
-    MOVING, //Mocvign
+    IDLE,   //Heisen er i ro
+    MOVING, //I bevegsle
     DOOR_OPEN,
-     EMERGENCY_STOPP 
-} ElevatorState;
+    EMERGENCY_STOP 
+} ElevatorState;    //Tilstanden til heisen
 
-//Defining the elevator "class"
+//Definerer elevator klassen
 struct Elevator = {
-    //Medlsemsvariabler
+
+//Medlsemsvariabler
     int currentFloor;
     int targetFloor;
     MotorDirection motorDir;
     ElevatorState ElevState;
 
-    //Medlemsfunksjoner
+//Medlemsfunksjoner
     void initialize();
     void moveToFlooe(int targetFloor);
     void updateStatus();
