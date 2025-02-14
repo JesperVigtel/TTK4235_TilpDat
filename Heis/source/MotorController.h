@@ -11,13 +11,16 @@ typedef enum {
 
 struct MotorController = {
 //Medlemsvariabler
-    int powerLevel;     //Spenningsnivå til heisen i Volt
+    float powerLevel;     //Spenningsnivå til heisen i Volt
     MotorDirection motorDir;
 
 //Medlemsfunksjoner
     //void elevio_motorDirection(motorDirection dirn);
     void setDirection(MotorDirection motorDir);
-    void emergencyStop()
-}
+    void emergencyStop();
+    void motorController_init()
+} MotorController;
+
+extern MotorController motorController;
 
 #endif

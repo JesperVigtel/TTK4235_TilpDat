@@ -3,8 +3,13 @@
 void initialize() { //For å initialisere heisen
     elevio_init();
 
-    //Order Manger inti
-    clear
+    orderManager_init();
+    motorController_init();
+    doorController_init();
+    sensorSystem_init();
+
+    int floor  = 
+
 }
 
 void moveToFloor(int targetFloor) { //Flytter heisen til ønsket etasje
