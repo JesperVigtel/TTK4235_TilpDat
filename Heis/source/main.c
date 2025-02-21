@@ -3,10 +3,31 @@
 #include <signal.h>
 #include <time.h>
 #include "driver/elevio.h"
+#include "Elevator.h"
 
 
 
 int main(){
+
+//Ønsket kjøring
+    initialize();
+
+    while (1){
+
+        //Hent signaler
+        get_signals();
+        updateStatus();
+    }
+
+
+    return 0;
+}
+
+
+
+
+/*  Eksempelkode
+
     elevio_init();
     
     printf("=== Example Program ===\n");
@@ -47,5 +68,4 @@ int main(){
         nanosleep(&(struct timespec){0, 20*1000*1000}, NULL);
     }
 
-    return 0;
-}
+*/
