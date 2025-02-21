@@ -1,14 +1,9 @@
 #pragma once
 #ifndef MOTORCONTROLLER_H
 #define MOTORCONTROLLER_H
-
 #include <stdio.h>
 #pragma once
 #include "elevio.h"
-
-typedef enum {
-    DIRN_DOWN, DIRN_UP, DIRN_STOP
-} MotorDirection;   //Retning til heisen
 
 
 typedef struct {
