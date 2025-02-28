@@ -28,6 +28,13 @@ void updateStatus() {   //oppdaterer statusen til heisen kontinuerlig
         elevator.state = EMERGENCY_STOP;
     }
 
+     // Debugging statements
+     printf("Current State: %d\n", elevator.state);
+     printf("Current Floor: %d\n", elevator.currentFloor);
+     printf("Target Floor: %d\n", elevator.targetFloor);
+     printf("Motor Direction: %d\n", elevator.motorDir);
+ 
+    
     switch(elevator.state){
         case IDLE:
             state_idle();

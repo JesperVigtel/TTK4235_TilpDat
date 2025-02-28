@@ -16,6 +16,6 @@ int main(){
     while (1) {
         panelSignals();
         updateStatus();
-    return 0;
-}
+    }
+return 0;
 }

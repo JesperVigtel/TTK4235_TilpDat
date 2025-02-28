@@ -15,6 +15,9 @@ void state_idle(){
 
 
 void state_moving() {
+    // Debugging statements
+    printf("Moving: Current Floor: %d, Target Floor: %d\n", elevator.currentFloor, elevator.targetFloor);
+
     if (elevator.targetFloor > elevator.currentFloor) {
         elevator.motorDir = DIRN_UP;
     } else if (elevator.targetFloor < elevator.currentFloor) {
@@ -31,6 +34,10 @@ void state_doorOpen() {
         elevator.state = IDLE;
         return;
     }
+
+    // Debugging statements
+    printf("Door Open: Current Floor: %d\n", elevator.currentFloor);
+
 
     elevio_motorDirection(DIRN_STOP); // S1: Heisen skal alltid stå stille når døren er åpen
     elevio_doorOpenLamp(1);
