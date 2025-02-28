@@ -41,39 +41,37 @@ int nextOrder() {
     int floor = elevio_floorSensor();
     printQueue();
     if (elevator.motorDir == DIRN_UP) {
-        for (int i = floor; i == N_FLOORS-1 ; i++) {
-            if (queue[i][BUTTON_HALL_UP]|| queue[i][BUTTON_CAB]){
-                for (int j = 0; j < N_BUTTONS - 1; i++){
+        for (int i = floor; i < N_FLOORS; i++) { // Corrected loop condition
+            if (queue[i][BUTTON_HALL_UP] || queue[i][BUTTON_CAB]) {
+                for (int j = 0; j < N_BUTTONS; j++) { // Corrected loop variable
                     removeOrder(i, j);
                 }
                 return i;
-
             }
         }
-
     }
     if (elevator.motorDir == DIRN_DOWN) {
-        for (int i = floor; i == 0 ; i--) {
-            if (queue[i][BUTTON_HALL_DOWN] || queue[i][BUTTON_CAB]){
-                for (int j = 0; j < N_BUTTONS - 1; i++){
+        for (int i = floor; i >= 0; i--) { // Corrected loop condition
+            if (queue[i][BUTTON_HALL_DOWN] || queue[i][BUTTON_CAB]) {
+                for (int j = 0; j < N_BUTTONS; j++) { // Corrected loop variable
                     removeOrder(i, j);
                 }
                 return i;
             }
         }
     }
-    if(elevator.motorDir == DIRN_STOP){
-        for (int i = floor; i == N_FLOORS-1 ; i++) {
-            if (queue[i][BUTTON_HALL_UP] || queue[i][BUTTON_CAB]){
-                for (int j = 0; j < N_BUTTONS - 1; i++){
+    if (elevator.motorDir == DIRN_STOP) {
+        for (int i = floor; i < N_FLOORS; i++) { // Corrected loop condition
+            if (queue[i][BUTTON_HALL_UP] || queue[i][BUTTON_CAB]) {
+                for (int j = 0; j < N_BUTTONS; j++) { // Corrected loop variable
                     removeOrder(i, j);
                 }
                 return i;
             }
         }
-        for (int i = floor; i == 0 ; i--) {
-            if (queue[i][BUTTON_HALL_DOWN] || queue[i][BUTTON_CAB]){
-                for (int j = 0; j < N_BUTTONS - 1; i++){
+        for (int i = floor; i >= 0; i--) { // Corrected loop condition
+            if (queue[i][BUTTON_HALL_DOWN] || queue[i][BUTTON_CAB]) {
+                for (int j = 0; j < N_BUTTONS; j++) { // Corrected loop variable
                     removeOrder(i, j);
                 }
                 return i;
