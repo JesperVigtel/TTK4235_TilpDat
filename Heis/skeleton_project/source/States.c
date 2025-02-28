@@ -46,7 +46,7 @@ void state_doorOpen() {
 void state_stop() {       //Stanser heisen øyeblikkelig
     elevio_motorDirection(DIRN_STOP);
     clearAllOrders(); 
-    while (elevio_stopButton()) {
+    while (elevio_stopButton()) { // Correct function used here
         if (elevator.state == DOOR_OPEN) {
             elevio_doorOpenLamp(1); 
         }
