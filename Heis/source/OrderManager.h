@@ -5,7 +5,7 @@
 #include "driver/elevio.h"
 #include <stdbool.h> // Trengs for bool
 #include <stdlib.h>  // Trengs for malloc/realloc/free
-#include "elevator.h"
+#include "Elevator.h"
 #include "elevio.h"
 
 bool queue[N_FLOORS][N_BUTTONS] = { ,{false}}; // 2D array for orders
