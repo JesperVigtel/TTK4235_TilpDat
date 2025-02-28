@@ -14,6 +14,6 @@ void addOrder(int floor, int button);
 void removeOrder(int floor, int button);
 void clearAllOrders();
 void printQueue();
-int nextOrder(int current_floor, motorDirection dir, int *next_floor, motorDirection *next_dir);
+int nextOrder(ButtonType Button);
 
 
