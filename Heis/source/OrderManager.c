@@ -39,13 +39,17 @@ void printQueue() {
     printf("\n");
 }
 
-int nextOrder(ButtonType Button) {
+int nextOrder() {
     int floor = elevio_floorSensor();
     printQueue();
     if (Elevator.motorDir == DIRN_UP) {
         for (int i = floor; i == N_FLOORS-1 ; i++) {
             if (queue[i][ButtonType.BUTTON_HALL_UP]|| queue[i][ButtonType.BUTTON_CAB]){
+                for (int j = 0; j < N_BUTTONS - 1; i++){
+                    removeOrder(i, j);
+                }
                 return i;
+
             }
         }
 
@@ -53,6 +57,9 @@ int nextOrder(ButtonType Button) {
     if (Elevator.motorDir == DIRN_DOWN) {
         for (int i = floor; i == 0 ; i--) {
             if (queue[i][ButtonType.BUTTON_HALL_DOWN] || queue[i][ButtonType.BUTTON_CAB]){
+                for (int j = 0; j < N_BUTTONS - 1; i++){
+                    removeOrder(i, j);
+                }
                 return i;
             }
         }
@@ -60,11 +67,17 @@ int nextOrder(ButtonType Button) {
     if(Elevator.motorDir == DIRN_STOP){
         for (int i = floor; i == N_FLOORS-1 ; i++) {
             if (queue[i][ButtonType.BUTTON_HALL_UP] || queue[i][ButtonType.BUTTON_CAB]){
+                for (int j = 0; j < N_BUTTONS - 1; i++){
+                    removeOrder(i, j);
+                }
                 return i;
             }
         }
         for (int i = floor; i == 0 ; i--) {
             if (queue[i][ButtonType.BUTTON_HALL_DOWN] || queue[i][ButtonType.BUTTON_CAB]){
+                for (int j = 0; j < N_BUTTONS - 1; i++){
+                    removeOrder(i, j);
+                }
                 return i;
             }
         }
