@@ -43,6 +43,8 @@ void state_doorOpen() {
     elevator.state = IDLE;
 }
 
+
+
 void state_stop() {       //Stanser heisen øyeblikkelig
     elevio_motorDirection(DIRN_STOP);
     clearAllOrders(); 
