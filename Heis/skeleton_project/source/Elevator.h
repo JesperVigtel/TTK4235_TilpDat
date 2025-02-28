@@ -1,14 +1,14 @@
 #ifndef ELEVATOR_H
 #define ELEVATOR_H
 
+#pragma once
 #include <stdio.h> //Input/output funcitons
 #include <stdlib.h>
 #include <signal.h>
 #include <time.h>
-#include "driver/elevio.h"
+#include "elevio.h"
 
 //Egne kilder
-#pragma once
 #include "OrderManager.h"
 #include "States.h"
 
