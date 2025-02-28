@@ -7,7 +7,7 @@
 #include "Elevator.h"
 
 
-bool queue[N_FLOORS][N_BUTTONS] = { ,{false}}; // 2D array for orders
+bool queue[N_FLOORS][N_BUTTONS] = {{false}}; // 2D array for orders
 
 void addOrder(int floor, int button);
 void removeOrder(int floor, int button);
