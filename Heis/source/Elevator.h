@@ -1,4 +1,3 @@
-#pragma once
 #ifndef ELEVATOR_H
 #define ELEVATOR_H
 
@@ -10,10 +9,8 @@
 
 //Egne kilder
 #pragma once
-#include "MotorController.h"
-#include "SensorSystem.h"
 #include "OrderManager.h"
-#include "DoorController.h"
+#include "States.h"
 
 
 typedef enum {
@@ -28,8 +25,7 @@ typedef struct {
     int currentFloor;
     int targetFloor;
     MotorDirection motorDir;
-    ElevatorState state;    
-    DoorStatus door;            //Funksjonalitet for å kun oppdatere dør_state        
+    ElevatorState state;         
 } Elevator;
 
 extern Elevator elevator;
