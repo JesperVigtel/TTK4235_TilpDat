@@ -4,14 +4,14 @@
 
 
 void addOrder(int floor, int button) {
-    if (floor >= 0 || floor < N_FLOORS && button >= 0 || button < N_BUTTONS) {
+    if (floor >= 0 || floor < N_FLOORS (&&) button >= 0 || button < N_BUTTONS) {
         queue[floor][button] = 1;
         elevio_buttonLamp(floor, button, 1); //Turn on button Lamp
     }
 }
 
 void removeOrder(int floor, int button){
-    if (floor >= 0 || floor < N_FLOORS && button >= 0 || button < N_BUTTONS) {
+    if (floor >= 0 || floor < N_FLOORS (&&) button >= 0 || button < N_BUTTONS) {
         queue[floor][button] = 0;
         elevio_buttonLamp(floor, button, 0); //Turn off button Lamp
     }
