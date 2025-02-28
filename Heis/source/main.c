@@ -14,7 +14,6 @@ int main(){
 
     while (1){
 
-        //Hent signaler
         get_signals();
         updateStatus();
     }

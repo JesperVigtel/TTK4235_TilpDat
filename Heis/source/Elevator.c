@@ -25,7 +25,7 @@ void idle(){
     int no = nextOrder();
     if (no == -1){
         elevio_motorDirection(DIRN_STOP);
-    } elif(no != -1){
+    } else if(no != -1){
         moveToFloor(no);
     }
 }
@@ -49,45 +49,40 @@ void moving() {
 }
 
 void doorOpen() {
+    if (elevator.currentFloor == -1) { // S2: Heisdøren skal aldri åpne seg utenfor en etasje
+        elevator.state = IDLE;
+        return;
+    }
+
+    elevio_motorDirection(DIRN_STOP); // S1: Heisen skal alltid stå stille når døren er åpen
     elevio_doorOpenLamp(1);
     nanosleep(&(struct timespec){3, 0}, NULL);
 
-    while (elevio_obstruction()){
-        //nanosleep(&(struct timespec){0, 20*1000*1000}, NULL);
-        nanosleep(&(struct timespec){3, 0}, NULL);
+    while (elevio_obstruction()) {
+        nanosleep(&(struct timespec){3, 0}, NULL);  //Pauser på 3 sek, grunnet vente 3 sekunder tter obstruction
     }
     elevio_doorOpenLamp(0);
-    elevator.state = IDLE; 
+    elevator.state = IDLE;
 }
 
 void stop() {       //Stanser heisen øyeblikkelig
     elevio_motorDirection(DIRN_STOP);
-        clearAllOrders(); 
-        while (elevio_stopButtonPressed()) {
-            if (elevator.state == DOOR_OPEN) {
-                elevio_doorOpenLamp(1); 
-            }
+    clearAllOrders(); 
+    while (elevio_stopButtonPressed()) {
+        if (elevator.state == DOOR_OPEN) {
+            elevio_doorOpenLamp(1); 
         }
-        elevator.state = IDLE; 
-        nanosleep(&(struct timespec){3, 0}, NULL); 
-        elevio_doorOpenLamp(0);
-        return;
+    }
+    elevator.state = IDLE; 
+    nanosleep(&(struct timespec){3, 0}, NULL); 
+    elevio_doorOpenLamp(0);
 }
 
 void updateStatus() {   //oppdaterer statusen til heisen kontinuerlig
     if (elevio_stopButton()) {
-        elevator.motorDir = DIRN_STOP;
-        elevio_motorDirection(DIRN_STOP);
-        clearAllOrders(); 
-        while (elevio_stopButtonPressed()) {
-            if (elevator.state == DOOR_OPEN) {
-                elevio_doorOpenLamp(1); 
-            }
-        }
-        elevator.state = IDLE; 
-        return;
+        elevator.state = EMERGENCY_STOP;
     }
-
+    
     switch(elevator.state){
         case IDLE:
             idle();
