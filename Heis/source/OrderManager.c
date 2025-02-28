@@ -39,10 +39,24 @@ void printQueue() {
     printf("\n");
 }
 
-void nextOrder(int current_floor, ButtonType Button,) {
-    int current_floor = elevio_floorSensor();
-    
-    
+int nextOrder(int floor, ButtonType Button) {
+    int floor = elevio_floorSensor();
+    printQueue();
+    if (Elevator.motorDir == DIRN_UP) {
+        for (int i = floor; i == N_FLOORS-1 ; i++) {
+            if (queue[i][ButtonType.BUTTON_HALL_UP]|| queue[i][ButtonType.BUTTON_CAB]){
+                return i;
+            }
+        }
+
+    }
+    if (Elevator.motorDir == DIRN_DOWN) {
+        for (int i = floor; i == 0 ; i--) {
+            if (queue[i][ButtonType.BUTTON_HALL_DOWN] || queue[i][ButtonType.BUTTON_CAB]){
+                return i;
+            }
+        }
+    }
     return -1;
 }
 
