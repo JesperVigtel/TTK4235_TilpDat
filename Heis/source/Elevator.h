@@ -34,9 +34,5 @@ extern Elevator elevator;
 void initialize();
 void moveToFloor(int targetFloor);
 void updateStatus();
-void stop();
-void idle();
-void moving();
-void doorOpen();
 
 #endif

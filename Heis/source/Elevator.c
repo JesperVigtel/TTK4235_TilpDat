@@ -16,7 +16,6 @@ void initialize() { //For å initialisere heisen
     // Når en gyldig etasje er funnet, stopp motoren
     elevio_motorDirection(DIRN_STOP);
     elevio_floorIndicator(elevator.currentFloor);
-
 }
 
 
@@ -35,7 +34,7 @@ void updateStatus() {   //oppdaterer statusen til heisen kontinuerlig
         case IDLE:
             state_idle();
             break;
-            
+
         case MOVING:
             state_moving();
             break;
