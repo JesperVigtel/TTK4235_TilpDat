@@ -2,6 +2,7 @@
 #include <stdio.h>
 
 
+bool queue[N_FLOORS][N_BUTTONS] = {{false}};
 
 void addOrder(int floor, int button) {
     if ((floor >= 0 && floor < N_FLOORS) && (button >= 0 && button < N_BUTTONS)) {
