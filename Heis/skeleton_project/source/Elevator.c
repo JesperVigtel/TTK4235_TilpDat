@@ -3,6 +3,7 @@
 Elevator elevator;
 
 void initialize() { //For å initialisere heisen
+    clearAllOrders();
     elevio_init();
     elevator.currentFloor = -1;
 
