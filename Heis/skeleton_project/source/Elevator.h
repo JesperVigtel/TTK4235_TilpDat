@@ -8,6 +8,7 @@
 //Egne kilder
 #include "OrderManager.h"
 #include "States.h"
+#include "Panel.h"
 
 
 typedef enum {
