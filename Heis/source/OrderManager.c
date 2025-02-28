@@ -3,3 +3,87 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <stdio.h>
+
+
+void addOrder(int floor, int button) {
+    if (floor >= 0 || floor < N_FLOORS && button >= 0 || button < N_BUTTONS) {
+        queue[floor][button] = 1;
+        elevio_buttonLamp(floor, button, 1); //Turn on button Lamp
+    }
+}
+
+void removeOrder(int floor, int button){
+    if (floor >= 0 || floor < N_FLOORS && button >= 0 || button < N_BUTTONS) {
+        queue[floor][button] = 0;
+        elevio_buttonLamp(floor, button, 0); //Turn off button Lamp
+    }
+}
+void clearAllOrders() {
+    for (int i = 0; i < N_FLOORS; i++) {
+        for (int j = 0; j < N_BUTTONS; j++) {
+            queue[i][j] = 0; // clear all orders
+            elevio_buttonLamp(i, j, 0); // Turn off Button Lamp
+        }
+    }
+}
+void printQueue() {
+    printf("\nHeis køsystem:\n");
+    printf("    Opp  Ned  Cabin\n");
+    for (int i = 0; i < FLOORS; i++) {
+        printf("Etasje %d: ", i);
+        for (int j = 0; j < BUTTONS; j++) {
+            printf(" %d ", queue[i][j]);
+        }
+        printf("\n");
+    }
+    printf("\n");
+}
+
+int nextOrder() {
+    int floor = elevio_floorSensor();
+    printQueue();
+    if (Elevator.motorDir == DIRN_UP) {
+        for (int i = floor; i == N_FLOORS-1 ; i++) {
+            if (queue[i][ButtonType.BUTTON_HALL_UP]|| queue[i][ButtonType.BUTTON_CAB]){
+                for (int j = 0; j < N_BUTTONS - 1; i++){
+                    removeOrder(i, j);
+                }
+                return i;
+
+            }
+        }
+
+    }
+    if (Elevator.motorDir == DIRN_DOWN) {
+        for (int i = floor; i == 0 ; i--) {
+            if (queue[i][ButtonType.BUTTON_HALL_DOWN] || queue[i][ButtonType.BUTTON_CAB]){
+                for (int j = 0; j < N_BUTTONS - 1; i++){
+                    removeOrder(i, j);
+                }
+                return i;
+            }
+        }
+    }
+    if(Elevator.motorDir == DIRN_STOP){
+        for (int i = floor; i == N_FLOORS-1 ; i++) {
+            if (queue[i][ButtonType.BUTTON_HALL_UP] || queue[i][ButtonType.BUTTON_CAB]){
+                for (int j = 0; j < N_BUTTONS - 1; i++){
+                    removeOrder(i, j);
+                }
+                return i;
+            }
+        }
+        for (int i = floor; i == 0 ; i--) {
+            if (queue[i][ButtonType.BUTTON_HALL_DOWN] || queue[i][ButtonType.BUTTON_CAB]){
+                for (int j = 0; j < N_BUTTONS - 1; i++){
+                    removeOrder(i, j);
+                }
+                return i;
+            }
+        }
+    }
+    return -1;
+}
+
+
+
