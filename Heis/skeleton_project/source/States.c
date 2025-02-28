@@ -18,6 +18,10 @@ void state_moving() {
     // Debugging statements
     printf("Moving: Current Floor: %d, Target Floor: %d\n", elevator.currentFloor, elevator.targetFloor);
 
+    if (elevio_floorSensor() != -1){
+        elevator.currentFloor = elevio_floorSensor();
+    }
+
     if (elevator.targetFloor > elevator.currentFloor) {
         elevator.motorDir = DIRN_UP;
     } else if (elevator.targetFloor < elevator.currentFloor) {
