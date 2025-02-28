@@ -7,7 +7,6 @@
 
 
 typedef struct {
-    float powerLevel;               //Spenningsnivå til heisen i Volt
     MotorDirection motorDir;        //Motorretning
 } MotorController;
 

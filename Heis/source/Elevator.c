@@ -1,14 +1,11 @@
 #include "Elevator.h"
 
 Elevator elevator;
-OrderManager orderManager;
 
 void initialize() { //For å initialisere heisen
     elevio_init();
     elevator.currentFloor = -1;
 
-
-    orderManager_init();
     doorController_init();
     sensorSystem_init();
 
@@ -22,43 +19,87 @@ void initialize() { //For å initialisere heisen
 
 }
 
+
+
+void idle(){
+    int no = nextOrder();
+    if (no == -1){
+        elevio_motorDirection(DIRN_STOP);
+    } elif(no != -1){
+        moveToFloor(no);
+    }
+}
+
 void moveToFloor(int targetFloor) { //Flytter heisen til ønsket etasje
     elevator.targetFloor = targetFloor;
     elevator.state = MOVING;
 }
 
-void updateStatus() {   //oppdaterer statusent til heisen kontinuerlig
-    switch(elevator.state){
-        case IDLE:
-            idle();
-            //Stå stille
-            break;
-        case MOVING:
-            //Bevegelse
-            break;
-        case DOOR_OPEN:
-            //Vent til døra er igjen
-            break;
-        case EMERGENCY_STOP:
-            stop();
-            //Stans umiddelbart og vent
-            break;
+
+void moving() {
+    if (elevator.targetFloor > elevator.currentFloor) {
+        elevator.motorDir = DIRN_UP;
+    } else if (elevator.targetFloor < elevator.currentFloor) {
+        elevator.motorDir = DIRN_DOWN;
+    } else {
+        elevator.motorDir = DIRN_STOP;
+        elevator.state = DOOR_OPEN;
     }
+    elevio_motorDirection(elevator.motorDir);
+}
+
+void doorOpen() {
+    elevio_doorOpenLamp(1);
+    nanosleep(&(struct timespec){3, 0}, NULL);
+
+    while (elevio_obstruction()){
+        //nanosleep(&(struct timespec){0, 20*1000*1000}, NULL);
+        nanosleep(&(struct timespec){3, 0}, NULL);
+    }
+    elevio_doorOpenLamp(0);
+    elevator.state = IDLE; 
 }
 
 void stop() {       //Stanser heisen øyeblikkelig
     elevio_motorDirection(DIRN_STOP);
-
+        clearAllOrders(); 
+        while (elevio_stopButtonPressed()) {
+            if (elevator.state == DOOR_OPEN) {
+                elevio_doorOpenLamp(1); 
+            }
+        }
+        elevator.state = IDLE; 
+        nanosleep(&(struct timespec){3, 0}, NULL); 
+        elevio_doorOpenLamp(0);
+        return;
 }
 
-void idle(){
-    if (orderManager.numOrders = 0) {
-        elevator.state = IDLE;
-        
-        //Stå stille, men ta imot bestillinger
-    } else if (orderManager.numOrders > 0) {
-        //Ta imot bestillinger
+void updateStatus() {   //oppdaterer statusen til heisen kontinuerlig
+    if (elevio_stopButton()) {
+        elevator.motorDir = DIRN_STOP;
+        elevio_motorDirection(DIRN_STOP);
+        clearAllOrders(); 
+        while (elevio_stopButtonPressed()) {
+            if (elevator.state == DOOR_OPEN) {
+                elevio_doorOpenLamp(1); 
+            }
+        }
+        elevator.state = IDLE; 
+        return;
     }
-    
 
+    switch(elevator.state){
+        case IDLE:
+            idle();
+            break;
+        case MOVING:
+            moving();
+            break;
+        case DOOR_OPEN:
+            doorOpen();
+            break;
+        case EMERGENCY_STOP:
+            stop();
+            break;
+    }
 }
