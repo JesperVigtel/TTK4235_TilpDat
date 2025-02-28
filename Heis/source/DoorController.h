@@ -10,6 +10,7 @@ typedef enum {
 
 void openDoor();
 
+
 void closeDoor();
 
 #endif
