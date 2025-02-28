@@ -14,7 +14,6 @@ int main(){
 
     while (1){
 
-        get_signals();
         updateStatus();
     }
 
