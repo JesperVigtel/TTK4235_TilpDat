@@ -6,9 +6,6 @@ void initialize() { //For å initialisere heisen
     elevio_init();
     elevator.currentFloor = -1;
 
-    doorController_init();
-    sensorSystem_init();
-
     while (elevator.currentFloor == -1) {   // Flytt heisen nedover for å finne en definert etasje
         elevio_motorDirection(DIRN_DOWN);
         elevator.currentFloor = elevio_floorSensor();
