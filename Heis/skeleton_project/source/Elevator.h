@@ -2,10 +2,7 @@
 #define ELEVATOR_H
 
 #pragma once
-#include <stdio.h> //Input/output funcitons
-#include <stdlib.h>
-#include <signal.h>
-#include <time.h>
+
 #include "elevio.h"
 
 //Egne kilder
