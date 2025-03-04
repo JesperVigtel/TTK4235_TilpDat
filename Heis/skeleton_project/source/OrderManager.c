@@ -40,7 +40,6 @@ void printQueue() {
 
 int nextOrder() {
     int floor = elevio_floorSensor();
-    printQueue();
     if (elevator.motorDir == DIRN_UP) {
         for (int i = floor; i < N_FLOORS; i++) { // Corrected loop condition
             if (queue[i][BUTTON_HALL_UP] || queue[i][BUTTON_CAB]) {
