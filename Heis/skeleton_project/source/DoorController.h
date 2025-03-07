@@ -1,7 +1,6 @@
 #ifndef DOORCONTROLLER_H
 #define DOORCONTROLLER_H
 
-#include "elevio.h"
 #include "Elevator.h"
 
 typedef enum {

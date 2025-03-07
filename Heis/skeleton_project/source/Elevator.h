@@ -1,9 +1,8 @@
 #ifndef ELEVATOR_H
 #define ELEVATOR_H
 
-#pragma once
 
-#include "elevio.h"
+#include "driver/elevio.h"
 #include <stdio.h>
 
 //Egne kilder
