@@ -61,7 +61,7 @@ int nextOrder() {
     if (elevator.motorDir == DIRN_UP) {
         for (int i = elevator.currentFloor; i < N_FLOORS; i++) { 
             if (queue[i][BUTTON_HALL_UP] || queue[i][BUTTON_CAB] || (i == N_FLOORS - 1 && queue[i][BUTTON_HALL_DOWN])) {
-                if (i == elevator.currentFloor) { 
+                if (i == elevator.currentFloor && elevio_floorSensor() != -1) { 
                     removeFloorOrders(i);
                 }
                 return i;
@@ -72,7 +72,7 @@ int nextOrder() {
     if (elevator.motorDir == DIRN_DOWN) {
         for (int i = elevator.currentFloor; i >= 0; i--) {
             if (queue[i][BUTTON_HALL_DOWN] || queue[i][BUTTON_CAB] || (i == 0 && queue[i][BUTTON_HALL_UP])) {
-                if (i == elevator.currentFloor) { 
+                if (i == elevator.currentFloor && elevio_floorSensor() != -1) { 
                     removeFloorOrders(i);
                 }
                 
@@ -84,7 +84,7 @@ int nextOrder() {
     if (elevator.motorDir == DIRN_STOP) {
         for (int i = 0; i < N_FLOORS; i++) { 
             if (queue[i][BUTTON_HALL_UP] || queue[i][BUTTON_CAB]) {
-                if (i == elevator.currentFloor) {
+                if (i == elevator.currentFloor && elevio_floorSensor() != -1) {
                     removeFloorOrders(i);
                 }
                 return i;
@@ -92,7 +92,7 @@ int nextOrder() {
         }
         for (int i = N_FLOORS-1; i >= 0; i--) { 
             if (queue[i][BUTTON_HALL_DOWN] || queue[i][BUTTON_CAB]) {
-                if (i == elevator.currentFloor) {
+                if (i == elevator.currentFloor && elevio_floorSensor() != -1) {
                     removeFloorOrders(i);
                 }
 
@@ -102,6 +102,10 @@ int nextOrder() {
     }
     return -1;
 }
+
+// fiks at heisen ikke automatisk fikser bestilling i etasjen du tidligere var i
+// åpne døren om den er i en etasje og det er en ordre i den etasjen når den trykkes
+// fiks stoppknapp og at den får tatt alle ordre i motsatt kjøreretning
 
 
 
