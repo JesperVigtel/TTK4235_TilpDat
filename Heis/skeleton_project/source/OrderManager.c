@@ -70,8 +70,8 @@ int nextOrder() {
                 for (int j = 0; j < N_BUTTONS; j++) { 
                     removeOrder(i, j);
                 }
-                return i;
                 printf("sjekka opp\n");
+                return i;
             }
         }
         for (int i = floor; i >= 0; i--) { 
