@@ -23,6 +23,7 @@ typedef struct {
     int currentFloor;
     int targetFloor;
     MotorDirection motorDir;
+    MotorDirection stopDir;
     ElevatorState state;         
 } Elevator;
 

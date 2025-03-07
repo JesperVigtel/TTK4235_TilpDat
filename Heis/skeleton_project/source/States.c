@@ -35,6 +35,13 @@ void state_moving() {
     } else if (elevator.targetFloor == elevator.currentFloor && floorSensor != -1) {
         elevator.motorDir = DIRN_STOP;
         elevator.state = DOOR_OPEN;
+    } else if (elevator.targetFloor == elevator.currentFloor){
+        if (elevator.stopDir == DIRN_DOWN){
+            elevator.motorDir = DIRN_UP;
+        } else if (elevator.stopDir == DIRN_UP){
+            elevator.motorDir = DIRN_DOWN;
+        }
+
     }
 
     if (floorSensor != -1){
@@ -65,6 +72,7 @@ void state_doorOpen() {
 
 void state_stop() {       //Stanser heisen øyeblikkelig
     printf("Nødstopp");
+    elevator.stopDir = elevator.motorDir;
     elevio_motorDirection(DIRN_STOP);
     elevator.motorDir=DIRN_STOP;
     clearAllOrders(); 
