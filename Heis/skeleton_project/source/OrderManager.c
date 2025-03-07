@@ -43,53 +43,68 @@ void printQueue() {
 }
 
 int nextOrder() {
-    //int floor = elevio_floorSensor();
+    // Sjekk om currentFloor er gyldig
+    if (elevator.currentFloor < 0 || elevator.currentFloor >= N_FLOORS) {
+        printf("Ugyldig etasje registrert\n");
+        return -1;
+    }
+
+    // Sjekk om det finnes en bestilling på nåværende etasje
+    if (elevator.motorDir == DIRN_STOP) {
+        for (int j = 0; j < N_BUTTONS; j++) {
+            if (queue[elevator.currentFloor][j]) {
+                removeFloorOrders(elevator.currentFloor);
+                return elevator.currentFloor;
+            }
+        }
+    }
+
     if (elevator.motorDir == DIRN_UP) {
         for (int i = elevator.currentFloor; i < N_FLOORS; i++) { 
-            if (queue[i][BUTTON_HALL_UP] || queue[i][BUTTON_CAB]){
-                if (i == elevator.currentFloor){ //Dersom vi er i etasjen, fjernes alle bestillingene
+            if (queue[i][BUTTON_HALL_UP] || queue[i][BUTTON_CAB] || (i == N_FLOORS - 1 && queue[i][BUTTON_HALL_DOWN])) {
+                if (i == elevator.currentFloor) { // Fjern ordre kun hvis vi er på etasjen
                     removeFloorOrders(i);
                 }
-            
                 return i;
             }
         }
     }
+
     if (elevator.motorDir == DIRN_DOWN) {
         for (int i = elevator.currentFloor; i >= 0; i--) {
-            if (queue[i][BUTTON_HALL_DOWN] || queue[i][BUTTON_CAB]) {
-                if (i == elevator.currentFloor){ //Dersom vi er i etasjen, fjernes alle bestillingene
+            if (queue[i][BUTTON_HALL_DOWN] || queue[i][BUTTON_CAB] || (i == 0 && queue[i][BUTTON_HALL_UP])) {
+                if (i == elevator.currentFloor) { // Fjern ordre kun hvis vi er på etasjen
                     removeFloorOrders(i);
                 }
                 
                 return i;
-                
             }
         }
     }
+
     if (elevator.motorDir == DIRN_STOP) {
         for (int i = elevator.currentFloor; i < N_FLOORS; i++) { 
             if (queue[i][BUTTON_HALL_UP] || queue[i][BUTTON_CAB]) {
-                if (i == elevator.currentFloor){ //Dersom vi er i etasjen, fjernes alle bestillingene
+                if (i == elevator.currentFloor) {
                     removeFloorOrders(i);
                 }
-                printf("sjekka opp\n");
+                printf("Sjekka opp\n");
                 return i;
             }
         }
         for (int i = elevator.currentFloor; i >= 0; i--) { 
             if (queue[i][BUTTON_HALL_DOWN] || queue[i][BUTTON_CAB]) {
-                if (i == elevator.currentFloor){ //Dersom vi er i etasjen, fjernes alle bestillingene
+                if (i == elevator.currentFloor) {
                     removeFloorOrders(i);
                 }
-                printf("sjekka ned\n");
+                printf("Sjekka ned\n");
                 return i;
             }
         }
     }
-   
     return -1;
 }
+
 
 
 
