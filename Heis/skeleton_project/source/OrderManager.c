@@ -6,6 +6,9 @@ bool queue[N_FLOORS][N_BUTTONS] = {{false}};
 
 void addOrder(int floor, int button) {
     if ((floor >= 0 && floor < N_FLOORS) && (button >= 0 && button < N_BUTTONS)) {
+        if (queue[floor][button] == 1) {      // check if an order already exists, not necessary with duplicate
+            return;
+        }
         queue[floor][button] = 1;
         elevio_buttonLamp(floor, button, 1); //Turn on button Lamp
     }
