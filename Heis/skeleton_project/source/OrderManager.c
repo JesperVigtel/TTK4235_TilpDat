@@ -1,6 +1,4 @@
 #include "OrderManager.h"
-#include <stdio.h>
-
 
 bool queue[N_FLOORS][N_BUTTONS] = {{false}};
 

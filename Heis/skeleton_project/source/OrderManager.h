@@ -5,7 +5,6 @@
 #include <stdbool.h> // Trengs for bool
 #include <stdlib.h>  // Trengs for malloc/realloc/free
 #include "Elevator.h"
-#include "elevio.h" // Include only one elevio.h
 
 extern bool queue[N_FLOORS][N_BUTTONS]; // 2D array for orders
 
