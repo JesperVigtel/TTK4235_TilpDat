@@ -49,14 +49,14 @@ int nextOrder() {
     }
 
 
-    if (elevator.motorDir == DIRN_STOP) {
-        for (int j = 0; j < N_BUTTONS; j++) {
-            if (queue[elevator.currentFloor][j]) {
-                removeFloorOrders(elevator.currentFloor);
-                return elevator.currentFloor;
-            }
-        }
-    }
+    // if (elevator.motorDir == DIRN_STOP) {
+    //     for (int j = 0; j < N_BUTTONS; j++) {
+    //         if (queue[elevator.currentFloor][j]) {
+    //             removeFloorOrders(elevator.currentFloor);
+    //             return elevator.currentFloor;
+    //         }
+    //     }
+    // }
 
     if (elevator.motorDir == DIRN_UP) {
         for (int i = elevator.currentFloor; i < N_FLOORS; i++) { 
