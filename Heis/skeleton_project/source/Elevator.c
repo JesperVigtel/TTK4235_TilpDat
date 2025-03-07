@@ -17,22 +17,17 @@ void initialize() { //For å initialisere heisen
 }
 
 
-
+/*
 void moveToFloor(int targetFloor) { //Flytter heisen til ønsket etasje
     elevator.targetFloor = targetFloor;
     elevator.state = MOVING;
 }
+*/
 
 void updateStatus() {   //oppdaterer statusen til heisen kontinuerlig
     if (elevio_stopButton()) {
         elevator.state = EMERGENCY_STOP;
     }
-
-     // Debugging statements
-     printf("Current State: %d\n", elevator.state);
-     printf("Current Floor: %d\n", elevator.currentFloor);
-     printf("Target Floor: %d\n", elevator.targetFloor);
-     printf("Motor Direction: %d\n", elevator.motorDir);
  
     
     switch(elevator.state){

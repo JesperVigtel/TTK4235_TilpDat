@@ -7,10 +7,13 @@ void state_idle(){
     int no = nextOrder();
     if (no == -1){
         elevio_motorDirection(DIRN_STOP);
-    } else if(no != -1){
-        moveToFloor(no);
+    } else {
+        elevator.targetFloor = no;
+        elevator.state = MOVING;
+        printQueue();
     }
-}
+}    
+
 
 
 
@@ -57,15 +60,18 @@ void state_doorOpen() {
 
 
 
+
+
 void state_stop() {       //Stanser heisen øyeblikkelig
     elevio_motorDirection(DIRN_STOP);
     clearAllOrders(); 
     while (elevio_stopButton()) { //Så lenge stoppknappen er trykket inn, skal heisen ikke kunne bevege seg
         if (elevator.state == DOOR_OPEN) {
+            printf("Er dette fucken!?");
             elevio_doorOpenLamp(1); 
         }
     }
-    elevator.state = IDLE; 
     nanosleep(&(struct timespec){3, 0}, NULL); 
     elevio_doorOpenLamp(0);
+    elevator.state = IDLE; 
 }
