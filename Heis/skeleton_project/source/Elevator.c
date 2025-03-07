@@ -7,6 +7,7 @@ void initialize() { //For å initialisere heisen
     elevio_init();
     panelInit();
     elevator.currentFloor = -1;
+    elevator.previousFloor = -1;
 
     while (elevator.currentFloor == -1) {   // Flytt heisen nedover for å finne en definert etasje
         elevio_motorDirection(DIRN_DOWN);

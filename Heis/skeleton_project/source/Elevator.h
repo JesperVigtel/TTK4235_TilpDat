@@ -22,6 +22,7 @@ typedef enum {
 typedef struct {
     int currentFloor;
     int targetFloor;
+    int previousFloor;
     MotorDirection motorDir;
     ElevatorState state;         
 } Elevator;

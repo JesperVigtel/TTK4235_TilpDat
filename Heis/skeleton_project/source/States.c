@@ -26,9 +26,6 @@ void state_moving() {
     if (no != -1) {
         elevator.targetFloor = no;
     }
-
-    if (floorSensor != -1){
-      elevator.currentFloor = floorSensor;
     }
 
     if (elevator.targetFloor > elevator.currentFloor) {
@@ -39,6 +36,9 @@ void state_moving() {
         elevator.motorDir = DIRN_STOP;
         elevator.state = DOOR_OPEN;
     }
+
+    if (floorSensor != -1){
+        elevator.currentFloor = floorSensor;
         
     elevio_motorDirection(elevator.motorDir);
 }
