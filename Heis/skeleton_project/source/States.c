@@ -75,13 +75,12 @@ void state_stop() {       //Stanser heisen øyeblikkelig
         elevio_stopLamp(1);
         if (floor != -1) {
             elevio_doorOpenLamp(1); 
-            if(elevio_stopButton == false) {
-                elevio_stopLamp(0);
-            } 
-            nanosleep(&(struct timespec){3, 0}, NULL);
-        }
     }
+}
+elevio_stopLamp(0);
+if (floor != -1) {
+    nanosleep(&(struct timespec){3, 0}, NULL);
+}
     elevio_doorOpenLamp(0);
-    elevio_stopLamp(0);
     elevator.state = IDLE; 
 }
