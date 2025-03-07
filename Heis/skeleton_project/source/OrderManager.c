@@ -52,7 +52,7 @@ int nextOrder() {
 
     switch (elevator.motorDir) {
         case DIRN_UP:
-            for (int i = elevator.currentFloor; i < N_FLOORS; i++) {
+            for (int i = floor; i < N_FLOORS; i++) {
                 if (queue[i][BUTTON_HALL_UP] || queue[i][BUTTON_CAB] || (i == N_FLOORS - 1 && queue[i][BUTTON_HALL_DOWN])) {
                     return i;
                 }
@@ -60,7 +60,7 @@ int nextOrder() {
             break;
 
         case DIRN_DOWN:
-            for (int i = elevator.currentFloor; i >= 0; i--) {
+            for (int i = floor; i >= 0; i--) {
                 if (queue[i][BUTTON_HALL_DOWN] || queue[i][BUTTON_CAB] || (i == 0 && queue[i][BUTTON_HALL_UP])) {
                     return i;
                 }
@@ -70,17 +70,13 @@ int nextOrder() {
         case DIRN_STOP:
             for (int i = 0; i < N_FLOORS; i++) {
                 if (queue[i][BUTTON_HALL_UP] || queue[i][BUTTON_CAB]) {
-                    // if (i == elevator.currentFloor && elevio_floorSensor() != -1) {
-                    //     removeFloorOrders(i);
-                    // }
+
                     return i;
                 }
             }
             for (int i = N_FLOORS - 1; i >= 0; i--) {
                 if (queue[i][BUTTON_HALL_DOWN] || queue[i][BUTTON_CAB]) {
-                    // if (i == elevator.currentFloor && elevio_floorSensor() != -1) {
-                    //     removeFloorOrders(i);
-                    // }
+                    
                     return i;
                 }
             }
