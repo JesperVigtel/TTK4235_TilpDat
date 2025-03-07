@@ -42,66 +42,116 @@ void printQueue() {
     printf("\n");
 }
 
+
 int nextOrder() {
     if (elevator.currentFloor < 0 || elevator.currentFloor >= N_FLOORS) {
         printf("Ugyldig etasje registrert\n");
         return -1;
     }
 
-
-    // if (elevator.motorDir == DIRN_STOP) {
-    //     for (int j = 0; j < N_BUTTONS; j++) {
-    //         if (queue[elevator.currentFloor][j]) {
-    //             removeFloorOrders(elevator.currentFloor);
-    //             return elevator.currentFloor;
-    //         }
-    //     }
-    // }
-
-    if (elevator.motorDir == DIRN_UP) {
-        for (int i = elevator.currentFloor; i < N_FLOORS; i++) { 
-            if (queue[i][BUTTON_HALL_UP] || queue[i][BUTTON_CAB] || (i == N_FLOORS - 1 && queue[i][BUTTON_HALL_DOWN])) {
-                // if (i == elevator.currentFloor && elevio_floorSensor() != -1) { 
-                //     removeFloorOrders(i);
-                // }
-                return i;
-            }
-        }
-    }
-
-    if (elevator.motorDir == DIRN_DOWN) {
-        for (int i = elevator.currentFloor; i >= 0; i--) {
-            if (queue[i][BUTTON_HALL_DOWN] || queue[i][BUTTON_CAB] || (i == 0 && queue[i][BUTTON_HALL_UP])) {
-                // if (i == elevator.currentFloor && elevio_floorSensor() != -1) { 
-                //     removeFloorOrders(i);
-                // }
-                
-                return i;
-            }
-        }
-    }
-
-    if (elevator.motorDir == DIRN_STOP) {
-        for (int i = 0; i < N_FLOORS; i++) { 
-            if (queue[i][BUTTON_HALL_UP] || queue[i][BUTTON_CAB]) {
-                if (i == elevator.currentFloor && elevio_floorSensor() != -1) {
-                    removeFloorOrders(i);
+    switch (elevator.motorDir) {
+        case DIRN_UP:
+            for (int i = elevator.currentFloor; i < N_FLOORS; i++) {
+                if (queue[i][BUTTON_HALL_UP] || queue[i][BUTTON_CAB] || (i == N_FLOORS - 1 && queue[i][BUTTON_HALL_DOWN])) {
+                    return i;
                 }
-                return i;
             }
-        }
-        for (int i = N_FLOORS-1; i >= 0; i--) { 
-            if (queue[i][BUTTON_HALL_DOWN] || queue[i][BUTTON_CAB]) {
-                if (i == elevator.currentFloor && elevio_floorSensor() != -1) {
-                    removeFloorOrders(i);
-                }
+            break;
 
-                return i;
+        case DIRN_DOWN:
+            for (int i = elevator.currentFloor; i >= 0; i--) {
+                if (queue[i][BUTTON_HALL_DOWN] || queue[i][BUTTON_CAB] || (i == 0 && queue[i][BUTTON_HALL_UP])) {
+                    return i;
+                }
             }
-        }
+            break;
+
+        case DIRN_STOP:
+            for (int i = 0; i < N_FLOORS; i++) {
+                if (queue[i][BUTTON_HALL_UP] || queue[i][BUTTON_CAB]) {
+                    if (i == elevator.currentFloor && elevio_floorSensor() != -1) {
+                        removeFloorOrders(i);
+                    }
+                    return i;
+                }
+            }
+            for (int i = N_FLOORS - 1; i >= 0; i--) {
+                if (queue[i][BUTTON_HALL_DOWN] || queue[i][BUTTON_CAB]) {
+                    if (i == elevator.currentFloor && elevio_floorSensor() != -1) {
+                        removeFloorOrders(i);
+                    }
+                    return i;
+                }
+            }
+            break;
+
+        default:
+            printf("Ugyldig kjøreretning\n");
+            return -1;
     }
+
     return -1;
 }
+// int nextOrder() {
+//     if (elevator.currentFloor < 0 || elevator.currentFloor >= N_FLOORS) {
+//         printf("Ugyldig etasje registrert\n");
+//         return -1;
+//     }
+
+
+//     if (elevator.motorDir == DIRN_STOP) {
+//         for (int j = 0; j < N_BUTTONS; j++) {
+//             if (queue[elevator.currentFloor][j]) {
+//                 removeFloorOrders(elevator.currentFloor);
+//                 return elevator.currentFloor;
+//             }
+//         }
+//     }
+
+//     if (elevator.motorDir == DIRN_UP) {
+//         for (int i = elevator.currentFloor; i < N_FLOORS; i++) { 
+//             if (queue[i][BUTTON_HALL_UP] || queue[i][BUTTON_CAB] || (i == N_FLOORS - 1 && queue[i][BUTTON_HALL_DOWN])) {
+//                 // if (i == elevator.currentFloor && elevio_floorSensor() != -1) { 
+//                 //     removeFloorOrders(i);
+//                 // }
+//                 return i;
+//             }
+//         }
+//     }
+
+//     if (elevator.motorDir == DIRN_DOWN) {
+//         for (int i = elevator.currentFloor; i >= 0; i--) {
+//             if (queue[i][BUTTON_HALL_DOWN] || queue[i][BUTTON_CAB] || (i == 0 && queue[i][BUTTON_HALL_UP])) {
+//                 // if (i == elevator.currentFloor && elevio_floorSensor() != -1) { 
+//                 //     removeFloorOrders(i);
+//                 // }
+                
+//                 return i;
+//             }
+//         }
+//     }
+
+//     if (elevator.motorDir == DIRN_STOP) {
+//         for (int i = 0; i < N_FLOORS; i++) { 
+//             if (queue[i][BUTTON_HALL_UP] || queue[i][BUTTON_CAB]) {
+//                 if (i == elevator.currentFloor && elevio_floorSensor() != -1) {
+//                     removeFloorOrders(i);
+//                 }
+//                 return i;
+//             }
+//         }
+//         for (int i = N_FLOORS-1; i >= 0; i--) { 
+//             if (queue[i][BUTTON_HALL_DOWN] || queue[i][BUTTON_CAB]) {
+//                 if (i == elevator.currentFloor && elevio_floorSensor() != -1) {
+//                     removeFloorOrders(i);
+//                 }
+
+//                 return i;
+//             }
+//         }
+//     }
+//     return -1;
+// }
 
 // fiks at heisen ikke automatisk fikser bestilling i etasjen du tidligere var i
 // åpne døren om den er i en etasje og det er en ordre i den etasjen når den trykkes
