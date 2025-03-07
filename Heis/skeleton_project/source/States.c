@@ -65,6 +65,7 @@ void state_doorOpen() {
 
      //Pauser på 3 sek, grunnet vente 3 sekunder tter obstruction
     elevio_doorOpenLamp(0);
+    removeFloorOrders(elevator.currentFloor);
     elevator.state = IDLE;
 }
 
