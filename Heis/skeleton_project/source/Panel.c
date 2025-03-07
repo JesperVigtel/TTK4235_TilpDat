@@ -16,6 +16,6 @@ void floorLight(){
 
 void panelInit() {
     for (int floor = 0; floor < N_FLOORS; floor++) {
-        removeFloorOrders();
+        removeFloorOrders(floor);
     }
 }
