@@ -21,7 +21,7 @@ void state_idle(){
 
 void state_moving() {
     // Debugging statements
-    printf("Moving: Current Floor: %d, Target Floor: %d\n", elevator.currentFloor, elevator.targetFloor);
+    //printf("Moving: Current Floor: %d, Target Floor: %d\n", elevator.currentFloor, elevator.targetFloor);
     int floorSensor = elevio_floorSensor();
     int no = nextOrder();
     if (no != -1) {
@@ -50,7 +50,7 @@ void state_doorOpen() {
     }
 
     // Debugging statements
-    printf("Door Open: Current Floor: %d\n", elevator.currentFloor);
+    //printf("Door Open: Current Floor: %d\n", elevator.currentFloor);
 
     elevio_motorDirection(DIRN_STOP); 
     elevio_doorOpenLamp(1);
