@@ -5,6 +5,7 @@ Elevator elevator;
 
 void state_idle(){
     int no = nextOrder();
+    printf(no);
     if (no == -1){
         elevio_motorDirection(DIRN_STOP);
     } else {
