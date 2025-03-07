@@ -5,6 +5,7 @@
 
 void panelSignals();
 void floorLight();
+void panelInit():
 
 
 #endif

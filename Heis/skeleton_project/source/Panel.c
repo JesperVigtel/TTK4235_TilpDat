@@ -13,3 +13,9 @@ void panelSignals(){
 void floorLight(){
     elevio_floorIndicator(elevator.currentFloor);
 }
+
+void panelInit() {
+    for (int floor = 0; floor < N_FLOORS; floor++) {
+        removeFloorOrders();
+    }
+}

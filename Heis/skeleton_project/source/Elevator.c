@@ -5,6 +5,7 @@ Elevator elevator;
 void initialize() { //For å initialisere heisen
     clearAllOrders();
     elevio_init();
+    panelInit();
     elevator.currentFloor = -1;
 
     while (elevator.currentFloor == -1) {   // Flytt heisen nedover for å finne en definert etasje
