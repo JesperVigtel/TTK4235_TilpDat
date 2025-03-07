@@ -45,7 +45,7 @@ void printQueue() {
 
 int nextOrder() {
     int floor = elevator.currentFloor;
-    if (floor || elevator.currentFloor >= N_FLOORS) {
+    if (floor < 0 || elevator.currentFloor >= N_FLOORS) {
         printf("Ugyldig etasje registrert\n");
         return -1;
     }
@@ -76,7 +76,7 @@ int nextOrder() {
             }
             for (int i = N_FLOORS - 1; i >= 0; i--) {
                 if (queue[i][BUTTON_HALL_DOWN] || queue[i][BUTTON_CAB]) {
-                    
+
                     return i;
                 }
             }
