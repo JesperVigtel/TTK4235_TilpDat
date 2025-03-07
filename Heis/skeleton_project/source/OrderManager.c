@@ -43,13 +43,13 @@ void printQueue() {
 }
 
 int nextOrder() {
-    // Sjekk om currentFloor er gyldig
+
     if (elevator.currentFloor < 0 || elevator.currentFloor >= N_FLOORS) {
         printf("Ugyldig etasje registrert\n");
         return -1;
     }
 
-    // Sjekk om det finnes en bestilling på nåværende etasje
+
     if (elevator.motorDir == DIRN_STOP) {
         for (int j = 0; j < N_BUTTONS; j++) {
             if (queue[elevator.currentFloor][j]) {
