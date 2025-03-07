@@ -47,6 +47,7 @@ int nextOrder() {
                 for (int j = 0; j < N_BUTTONS; j++) { 
                     removeOrder(i, j);
                 }
+                printf("sjekka opp med dir opp\n");
                 return i;
             }
         }
@@ -57,7 +58,9 @@ int nextOrder() {
                 for (int j = 0; j < N_BUTTONS; j++) { 
                     removeOrder(i, j);
                 }
+                printf("sjekka ned med dir ned\n");
                 return i;
+                
             }
         }
     }
@@ -68,6 +71,7 @@ int nextOrder() {
                     removeOrder(i, j);
                 }
                 return i;
+                printf("sjekka opp\n");
             }
         }
         for (int i = floor; i >= 0; i--) { 
@@ -75,10 +79,12 @@ int nextOrder() {
                 for (int j = 0; j < N_BUTTONS; j++) { 
                     removeOrder(i, j);
                 }
+                printf("sjekka ned\n");
                 return i;
             }
         }
     }
+    printf("ingen ordre\n");
     return -1;
 }
 
