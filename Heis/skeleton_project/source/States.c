@@ -5,11 +5,10 @@ Elevator elevator;
 
 void state_idle(){
     int no = nextOrder();
-    printf(no);
+    printf("Neste ordre er: %d/n", no);
     if (no == -1){
         elevio_motorDirection(DIRN_STOP);
     } else {
-        elevator.targetFloor = no;
         elevator.state = MOVING;
         printQueue();
     }
@@ -22,6 +21,8 @@ void state_moving() {
     // Debugging statements
     printf("Moving: Current Floor: %d, Target Floor: %d\n", elevator.currentFloor, elevator.targetFloor);
     int floorSensor = elevio_floorSensor();
+    int no = nextOrder();
+    elevator.targetFloor = no;
 
     if (floorSensor != -1){
         elevator.currentFloor = floorSensor;
