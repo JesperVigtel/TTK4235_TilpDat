@@ -28,17 +28,18 @@ void state_moving() {
     }
 
     if (floorSensor != -1){
-        elevator.currentFloor = floorSensor;
+      elevator.currentFloor = floorSensor;
     }
 
     if (elevator.targetFloor > elevator.currentFloor) {
         elevator.motorDir = DIRN_UP;
     } else if (elevator.targetFloor < elevator.currentFloor) {
         elevator.motorDir = DIRN_DOWN;
-    } else if (elevator.targetFloor == elevator.currentFloor) {
+    } else if (elevator.targetFloor == elevator.currentFloor && floorSensor != -1) {
         elevator.motorDir = DIRN_STOP;
         elevator.state = DOOR_OPEN;
     }
+        
     elevio_motorDirection(elevator.motorDir);
 }
 
@@ -56,8 +57,13 @@ void state_doorOpen() {
     nanosleep(&(struct timespec){3, 0}, NULL);
 
     while (elevio_obstruction()) {
-        nanosleep(&(struct timespec){3, 0}, NULL);  //Pauser på 3 sek, grunnet vente 3 sekunder tter obstruction
+        panelSignals(); //kan fortsatt ta inn ordre mens obstruksjon
+        if(!elevio_obstruction()){
+            nanosleep(&(struct timespec){3, 0}, NULL);
+        }
     }
+
+     //Pauser på 3 sek, grunnet vente 3 sekunder tter obstruction
     elevio_doorOpenLamp(0);
     elevator.state = IDLE;
 }

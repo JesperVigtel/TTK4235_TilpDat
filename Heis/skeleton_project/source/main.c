@@ -15,8 +15,7 @@ int main(){
     initialize();
 
     while (1) {
-        panelSignals();
         updateStatus();
-    }
+        panelSignals();
 return 0;
 }

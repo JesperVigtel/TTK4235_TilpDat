@@ -88,7 +88,6 @@ int nextOrder() {
                 if (i == elevator.currentFloor) {
                     removeFloorOrders(i);
                 }
-                printf("Sjekka opp\n");
                 return i;
             }
         }
@@ -97,7 +96,7 @@ int nextOrder() {
                 if (i == elevator.currentFloor) {
                     removeFloorOrders(i);
                 }
-                printf("Sjekka ned\n");
+
                 return i;
             }
         }
