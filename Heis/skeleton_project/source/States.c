@@ -75,6 +75,7 @@ void state_doorOpen() {
 void state_stop() {       //Stanser heisen øyeblikkelig
     printf("Nødstopp");
     elevio_motorDirection(DIRN_STOP);
+    elevator.motorDir=DIRN_STOP;
     clearAllOrders(); 
     int floor = elevio_floorSensor();
     while (elevio_stopButton()) { //Så lenge stoppknappen er trykket inn, skal heisen ikke kunne bevege seg
