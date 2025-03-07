@@ -17,9 +17,10 @@ void state_idle(){
 void state_moving() {
     // Debugging statements
     printf("Moving: Current Floor: %d, Target Floor: %d\n", elevator.currentFloor, elevator.targetFloor);
+    int floorSensor = elevio_floorSensor();
 
-    if (elevio_floorSensor() != -1){
-        elevator.currentFloor = elevio_floorSensor();
+    if (floorSensor != -1){
+        elevator.currentFloor = floorSensor;
     }
 
     if (elevator.targetFloor > elevator.currentFloor) {
@@ -34,7 +35,7 @@ void state_moving() {
 }
 
 void state_doorOpen() {
-    if (elevator.currentFloor == -1) { // S2: Heisdøren skal aldri åpne seg utenfor en etasje
+    if (elevator.currentFloor == -1) { 
         elevator.state = IDLE;
         return;
     }
