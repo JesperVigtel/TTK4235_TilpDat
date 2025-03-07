@@ -9,3 +9,7 @@ void panelSignals(){
         }
     }
 }
+
+void floorLight(){
+    elevio_floorIndicator(elevator.currentFloor);
+}

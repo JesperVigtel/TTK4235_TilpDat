@@ -4,6 +4,7 @@
 #include "Elevator.h"
 
 void panelSignals();
+void floorLight();
 
 
 #endif

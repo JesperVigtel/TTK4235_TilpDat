@@ -8,6 +8,8 @@ void state_idle(){
     printf("Neste ordre er: %d/n", no);
     if (no == -1){
         elevio_motorDirection(DIRN_STOP);
+    } else if (no == elevator.currentFloor){
+        elevator.state = IDLE;
     } else {
         elevator.state = MOVING;
         printQueue();
@@ -49,7 +51,6 @@ void state_doorOpen() {
 
     // Debugging statements
     printf("Door Open: Current Floor: %d\n", elevator.currentFloor);
-
 
     elevio_motorDirection(DIRN_STOP); 
     elevio_doorOpenLamp(1);
