@@ -69,17 +69,17 @@ int nextOrder() {
         case DIRN_STOP:
             for (int i = 0; i < N_FLOORS; i++) {
                 if (queue[i][BUTTON_HALL_UP] || queue[i][BUTTON_CAB]) {
-                    if (i == elevator.currentFloor && elevio_floorSensor() != -1) {
-                        removeFloorOrders(i);
-                    }
+                    // if (i == elevator.currentFloor && elevio_floorSensor() != -1) {
+                    //     removeFloorOrders(i);
+                    // }
                     return i;
                 }
             }
             for (int i = N_FLOORS - 1; i >= 0; i--) {
                 if (queue[i][BUTTON_HALL_DOWN] || queue[i][BUTTON_CAB]) {
-                    if (i == elevator.currentFloor && elevio_floorSensor() != -1) {
-                        removeFloorOrders(i);
-                    }
+                    // if (i == elevator.currentFloor && elevio_floorSensor() != -1) {
+                    //     removeFloorOrders(i);
+                    // }
                     return i;
                 }
             }
