@@ -5,7 +5,6 @@ Elevator elevator;
 
 void state_idle(){
     int no = nextOrder();
-    printf("Neste ordre er: %d/n", no);
     if (no == -1){
         elevio_motorDirection(DIRN_STOP);
     } else if (no == elevator.currentFloor){
@@ -72,7 +71,6 @@ void state_stop() {       //Stanser heisen øyeblikkelig
     clearAllOrders(); 
     while (elevio_stopButton()) { //Så lenge stoppknappen er trykket inn, skal heisen ikke kunne bevege seg
         if (elevator.state == DOOR_OPEN) {
-            printf("Er dette fucken!?");
             elevio_doorOpenLamp(1); 
         }
     }

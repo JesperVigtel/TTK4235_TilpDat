@@ -16,7 +16,7 @@ void removeFloorOrders(int floor){
     if (floor >= 0 && floor < N_FLOORS)  {
         for (int j = 0; j < N_BUTTONS; j++) {
             queue[floor][j] = 0;
-            elevio_buttonLamp(floor, button, 0); //Turn off button Lamp
+            elevio_buttonLamp(floor, j, 0); //Turn off button Lamp
         }
     }
 }
@@ -50,7 +50,7 @@ int nextOrder() {
                 if (i == elevator.currentFloor){ //Dersom vi er i etasjen, fjernes alle bestillingene
                     removeFloorOrders(i);
                 }
-                printf("sjekka opp med dir opp\n");
+            
                 return i;
             }
         }
@@ -59,9 +59,9 @@ int nextOrder() {
         for (int i = elevator.currentFloor; i >= 0; i--) {
             if (queue[i][BUTTON_HALL_DOWN] || queue[i][BUTTON_CAB]) {
                 if (i == elevator.currentFloor){ //Dersom vi er i etasjen, fjernes alle bestillingene
-                    fremoveFloorOrders(i);
+                    removeFloorOrders(i);
                 }
-                printf("sjekka ned med dir ned\n");
+                
                 return i;
                 
             }
@@ -87,7 +87,7 @@ int nextOrder() {
             }
         }
     }
-    printf("ingen ordre\n");
+   
     return -1;
 }
 
