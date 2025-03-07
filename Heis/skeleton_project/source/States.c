@@ -7,7 +7,7 @@ void state_idle(){
     int no = nextOrder();
     if (no == -1){
         elevio_motorDirection(DIRN_STOP);
-    } else if (no == elevator.currentFloor){
+    } else if (no == elevator.currentFloor && elevio_floorSensor() != -1){
         elevator.state = DOOR_OPEN;
     } else {
         elevator.state = MOVING;
@@ -80,12 +80,12 @@ void state_stop() {       //Stanser heisen øyeblikkelig
         elevio_stopLamp(1);
         if (floor != -1) {
             elevio_doorOpenLamp(1); 
+        }
     }
-}
-elevio_stopLamp(0);
-if (floor != -1) {
-    nanosleep(&(struct timespec){3, 0}, NULL);
-}
-    elevio_doorOpenLamp(0);
-    elevator.state = IDLE; 
-}
+    elevio_stopLamp(0);
+    if (floor != -1) {
+        nanosleep(&(struct timespec){3, 0}, NULL);
+    }
+        elevio_doorOpenLamp(0);
+        elevator.state = IDLE; 
+    }
