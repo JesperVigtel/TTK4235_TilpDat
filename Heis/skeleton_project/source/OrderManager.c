@@ -61,9 +61,9 @@ int nextOrder() {
     if (elevator.motorDir == DIRN_UP) {
         for (int i = elevator.currentFloor; i < N_FLOORS; i++) { 
             if (queue[i][BUTTON_HALL_UP] || queue[i][BUTTON_CAB] || (i == N_FLOORS - 1 && queue[i][BUTTON_HALL_DOWN])) {
-                if (i == elevator.currentFloor && elevio_floorSensor() != -1) { 
-                    removeFloorOrders(i);
-                }
+                // if (i == elevator.currentFloor && elevio_floorSensor() != -1) { 
+                //     removeFloorOrders(i);
+                // }
                 return i;
             }
         }
@@ -72,9 +72,9 @@ int nextOrder() {
     if (elevator.motorDir == DIRN_DOWN) {
         for (int i = elevator.currentFloor; i >= 0; i--) {
             if (queue[i][BUTTON_HALL_DOWN] || queue[i][BUTTON_CAB] || (i == 0 && queue[i][BUTTON_HALL_UP])) {
-                if (i == elevator.currentFloor && elevio_floorSensor() != -1) { 
-                    removeFloorOrders(i);
-                }
+                // if (i == elevator.currentFloor && elevio_floorSensor() != -1) { 
+                //     removeFloorOrders(i);
+                // }
                 
                 return i;
             }
