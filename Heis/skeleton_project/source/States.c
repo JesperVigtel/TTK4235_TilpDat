@@ -27,7 +27,7 @@ void state_moving() {
         elevator.motorDir = DIRN_UP;
     } else if (elevator.targetFloor < elevator.currentFloor) {
         elevator.motorDir = DIRN_DOWN;
-    } else {
+    } else if (elevator.targetFloor == elevator.currentFloor) {
         elevator.motorDir = DIRN_STOP;
         elevator.state = DOOR_OPEN;
     }
@@ -35,7 +35,7 @@ void state_moving() {
 }
 
 void state_doorOpen() {
-    if (elevator.currentFloor == -1) { 
+    if (elevator.currentFloor == -1) {  //Aldri åpne dør utenfor etasje
         elevator.state = IDLE;
         return;
     }
@@ -44,7 +44,7 @@ void state_doorOpen() {
     printf("Door Open: Current Floor: %d\n", elevator.currentFloor);
 
 
-    elevio_motorDirection(DIRN_STOP); // S1: Heisen skal alltid stå stille når døren er åpen
+    elevio_motorDirection(DIRN_STOP); 
     elevio_doorOpenLamp(1);
     nanosleep(&(struct timespec){3, 0}, NULL);
 
