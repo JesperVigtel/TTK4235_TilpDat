@@ -8,7 +8,7 @@ void state_idle(){
     if (no == -1){
         elevio_motorDirection(DIRN_STOP);
     } else if (no == elevator.currentFloor){
-        elevator.state = IDLE;
+        elevator.state = DOOR_OPEN;
     } else {
         elevator.state = MOVING;
         printQueue();
@@ -49,9 +49,6 @@ void state_doorOpen() {
         return;
     }
 
-    // Debugging statements
-    //printf("Door Open: Current Floor: %d\n", elevator.currentFloor);
-
     elevio_motorDirection(DIRN_STOP); 
     elevio_doorOpenLamp(1);
     nanosleep(&(struct timespec){3, 0}, NULL);
@@ -63,9 +60,8 @@ void state_doorOpen() {
         }
     }
 
-     //Pauser på 3 sek, grunnet vente 3 sekunder tter obstruction
     elevio_doorOpenLamp(0);
-    removeFloorOrders(elevator.currentFloor);
+    removeFloorOrders(elevio_floorSensor());
     elevator.state = IDLE;
 }
 
