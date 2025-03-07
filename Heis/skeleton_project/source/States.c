@@ -22,7 +22,9 @@ void state_moving() {
     printf("Moving: Current Floor: %d, Target Floor: %d\n", elevator.currentFloor, elevator.targetFloor);
     int floorSensor = elevio_floorSensor();
     int no = nextOrder();
-    elevator.targetFloor = no;
+    if (no != -1) {
+        elevator.targetFloor = no;
+    }
 
     if (floorSensor != -1){
         elevator.currentFloor = floorSensor;
