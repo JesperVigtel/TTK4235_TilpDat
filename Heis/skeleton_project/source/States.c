@@ -11,6 +11,7 @@ void state_idle(){
         elevator.state = DOOR_OPEN;
     } else {
         elevator.state = MOVING;
+        printf("jeg printer her");
         printQueue();
     }
 }    
