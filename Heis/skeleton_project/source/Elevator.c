@@ -16,7 +16,7 @@ void elevator_initialize() { //For å initialisere heisen
     elevio_motorDirection(DIRN_STOP);
 }
 
-void elevator_updateState() {   //oppdaterer statusen til heisen kontinuerlig
+void elevator_updateState() {   //oppdaterer oppførsel til heisen kontinuerlig i henhold til tilstander
     if (elevio_stopButton()) {
         elevator.state = EMERGENCY_STOP;
     }
