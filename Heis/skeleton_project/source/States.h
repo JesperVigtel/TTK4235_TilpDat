@@ -9,6 +9,6 @@ void state_stop();
 void state_doorOpen();
 void state_moving();
 void state_idle();
-void waitThreeSeconds();
+
 
 #endif

@@ -91,22 +91,3 @@ void state_stop() {       //Stanser heisen øyeblikkelig
         elevator.state = IDLE; 
 }
 
-void waitThreeSeconds() {
-    struct timespec start, current;
-    clock_gettime(CLOCK_MONOTONIC, &start);
-    double elapsed = 0;
-    double wait_time = 3.0;  // Wait time in seconds
-
-    while (elapsed < wait_time) {
-        clock_gettime(CLOCK_MONOTONIC, &current);
-        elapsed = current.tv_sec - start.tv_sec + (current.tv_nsec - start.tv_nsec) / 1e9;
-
-        // Call panelSignals() to check for button presses
-        panelSignals();
-
-        // Check for obstruction
-        if (elevio_obstruction()) {
-            clock_gettime(CLOCK_MONOTONIC, &start);  // Reset the timer if obstruction is detected
-        }
-    }
-}

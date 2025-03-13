@@ -12,7 +12,7 @@
 int main(){
 
 //Ønsket kjøring
-    initialize();
+    elevator_initialize();
 
     while (1) {
         elevator_updateState();

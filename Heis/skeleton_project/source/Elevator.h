@@ -30,7 +30,8 @@ typedef struct {
 extern Elevator elevator;
 
 //Medlemsfunksjoner
-void initialize();
-void updateStatus();
+void elevator_initialize();
+void elevator_updateState();
+void waitThreeSeconds();
 
 #endif
