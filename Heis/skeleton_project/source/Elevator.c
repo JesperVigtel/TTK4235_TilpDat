@@ -16,15 +16,7 @@ void initialize() { //For å initialisere heisen
     elevio_motorDirection(DIRN_STOP);
 }
 
-
-/*
-void moveToFloor(int targetFloor) { //Flytter heisen til ønsket etasje
-    elevator.targetFloor = targetFloor;
-    elevator.state = MOVING;
-}
-*/
-
-void updateStatus() {   //oppdaterer statusen til heisen kontinuerlig
+void elevator_updateState() {   //oppdaterer statusen til heisen kontinuerlig
     if (elevio_stopButton()) {
         elevator.state = EMERGENCY_STOP;
     }

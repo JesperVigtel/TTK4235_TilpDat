@@ -31,7 +31,6 @@ extern Elevator elevator;
 
 //Medlemsfunksjoner
 void initialize();
-void moveToFloor(int targetFloor);
 void updateStatus();
 
 #endif

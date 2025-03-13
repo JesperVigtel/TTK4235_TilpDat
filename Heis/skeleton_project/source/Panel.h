@@ -3,7 +3,7 @@
 
 #include "Elevator.h"
 
-void panelSignals();
+void panel_getOrders();
 void floorLight();
 void panelInit();
 

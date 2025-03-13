@@ -15,8 +15,8 @@ int main(){
     initialize();
 
     while (1) {
-        updateStatus();
-        panelSignals();
+        elevator_updateState();
+        panel_getOrders();
     }
 return 0;
 }
