@@ -6,11 +6,11 @@
 #include "Elevator.h"
 
 int main(){
-    elevator_initialize();          //Initialiserer heisen til ønsket tilstand før løkke kjøres
+    elevator_initialize();          //Initialiserer heisen til en definert starttilstand
 
     while (1) {
-        elevator_updateState();     //Oppdaterer statusen, og avgjør handling til heisen basert på bestillinger
-        panel_getOrders();          //Sjekker panelet for bestillinger, og legger til i køen
+        elevator_updateState();     // Oppdaterer hvilken tilstand heisen er i (idle, moving, door open, stopp), og avgjør handling
+        panel_scanForOrders();          // Leser knappetrykk i panelet og oppdaterer bestillingskøen.
     }
 return 0;
 }
