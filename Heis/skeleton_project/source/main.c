@@ -5,18 +5,12 @@
 
 #include "Elevator.h"
 
-
-
-
-
 int main(){
-
-//Ønsket kjøring
-    elevator_initialize();
+    elevator_initialize();          //Initialiserer heisen til ønsket tilstand før løkke kjøres
 
     while (1) {
-        elevator_updateState();
-        panel_getOrders();
+        elevator_updateState();     //Oppdaterer statusen, og avgjør handling til heisen basert på bestillinger
+        panel_getOrders();          //Sjekker panelet for bestillinger, og legger til i køen
     }
 return 0;
 }
