@@ -4,7 +4,7 @@
 #include "Elevator.h"
 #include <time.h>
 
-
+//Statesene til heisen ved kjøring av program
 void state_stop();
 void state_doorOpen();
 void state_moving();
