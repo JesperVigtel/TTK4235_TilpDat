@@ -11,6 +11,7 @@ int main(){
     while (1) {
         elevator_updateState();     // Oppdaterer hvilken tilstand heisen er i (idle, moving, door open, stopp), og avgjør handling
         panel_scanForOrders();          // Leser knappetrykk i panelet og oppdaterer bestillingskøen.
+        
     }
 return 0;
 }
