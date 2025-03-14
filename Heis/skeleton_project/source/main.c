@@ -5,18 +5,12 @@
 
 #include "Elevator.h"
 
-
-
-
-
 int main(){
-
-//Ønsket kjøring
-    initialize();
+    elevator_initialize();          //Initialiserer heisen til en definert starttilstand
 
     while (1) {
-        updateStatus();
-        panelSignals();
+        elevator_updateState();     // Oppdaterer hvilken tilstand heisen er i (idle, moving, door open, stopp), og avgjør handling
+        panel_scanForOrders();          // Leser knappetrykk i panelet og oppdaterer bestillingskøen.
     }
 return 0;
 }

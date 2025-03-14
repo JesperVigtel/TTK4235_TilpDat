@@ -4,11 +4,11 @@ bool queue[N_FLOORS][N_BUTTONS] = {{false}};
 
 void addOrder(int floor, int button) {
     if ((floor >= 0 && floor < N_FLOORS) && (button >= 0 && button < N_BUTTONS)) {
-        if (queue[floor][button] == 1) {      // check if an order already exists, not necessary with duplicate
+        if (queue[floor][button] == 1) {      
             return;
         }
         queue[floor][button] = 1;
-        elevio_buttonLamp(floor, button, 1); //Turn on button Lamp
+        elevio_buttonLamp(floor, button, 1); 
     }
 }
 
@@ -16,15 +16,15 @@ void removeFloorOrders(int floor){
     if (floor >= 0 && floor < N_FLOORS)  {
         for (int j = 0; j < N_BUTTONS; j++) {
             queue[floor][j] = 0;
-            elevio_buttonLamp(floor, j, 0); //Turn off button Lamp
+            elevio_buttonLamp(floor, j, 0); 
         }
     }
 }
 void clearAllOrders() {
     for (int i = 0; i < N_FLOORS; i++) {
         for (int j = 0; j < N_BUTTONS; j++) {
-            queue[i][j] = 0; // clear all orders
-            elevio_buttonLamp(i, j, 0); // Turn off Button Lamp
+            queue[i][j] = 0; 
+            elevio_buttonLamp(i, j, 0); 
         }
     }
     printf("Orde er tømt!");

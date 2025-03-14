@@ -30,8 +30,8 @@ typedef struct {
 extern Elevator elevator;
 
 //Medlemsfunksjoner
-void initialize();
-void moveToFloor(int targetFloor);
-void updateStatus();
+void elevator_initialize();     //Starter opp heisen tiø ønsket tilstand
+void elevator_updateState();    //oppdaterer oppførsel til heisen kontinuerlig i henhold til tilstander
+void waitThreeSeconds();        //Får heisen til å vente 3 sekunder 
 
 #endif

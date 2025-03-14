@@ -2,7 +2,7 @@
 
 Elevator elevator;
 
-void initialize() { //For å initialisere heisen
+void elevator_initialize() { //For å initialisere heisen
     clearAllOrders();
     elevio_init();
     panelInit();
@@ -16,15 +16,7 @@ void initialize() { //For å initialisere heisen
     elevio_motorDirection(DIRN_STOP);
 }
 
-
-/*
-void moveToFloor(int targetFloor) { //Flytter heisen til ønsket etasje
-    elevator.targetFloor = targetFloor;
-    elevator.state = MOVING;
-}
-*/
-
-void updateStatus() {   //oppdaterer statusen til heisen kontinuerlig
+void elevator_updateState() {   //oppdaterer oppførsel til heisen kontinuerlig i henhold til tilstander
     if (elevio_stopButton()) {
         elevator.state = EMERGENCY_STOP;
     }
@@ -46,5 +38,24 @@ void updateStatus() {   //oppdaterer statusen til heisen kontinuerlig
         case EMERGENCY_STOP:
             state_stop();
             break;
+    }
+}
+
+
+void waitThreeSeconds() {
+    struct timespec start, current;
+    clock_gettime(CLOCK_MONOTONIC, &start);
+    double elapsed = 0;
+    double waitTime = 3.0; 
+
+    while (elapsed < waitTime) {
+        clock_gettime(CLOCK_MONOTONIC, &current);
+        elapsed = current.tv_sec - start.tv_sec + (current.tv_nsec - start.tv_nsec) / 1e9;
+
+        panelSignals();
+
+        if (elevio_obstruction()) {
+            clock_gettime(CLOCK_MONOTONIC, &start); 
+        }
     }
 }
