@@ -52,7 +52,7 @@ void waitThreeSeconds() {
         clock_gettime(CLOCK_MONOTONIC, &current);
         elapsed = current.tv_sec - start.tv_sec + (current.tv_nsec - start.tv_nsec) / 1e9;
 
-        panelSignals();
+        panel_scanForOrders(); 
 
         if (elevio_obstruction()) {
             clock_gettime(CLOCK_MONOTONIC, &start); 
